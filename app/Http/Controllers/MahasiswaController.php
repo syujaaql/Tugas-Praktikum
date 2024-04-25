@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Mahasiswa;
 use Illuminate\Http\Request;
 
 class MahasiswaController extends Controller
@@ -11,7 +12,11 @@ class MahasiswaController extends Controller
      */
     public function index()
     {
-        return view('mahasiswa');
+        $mahasiswa = Mahasiswa::all();
+        return view('mahasiswa', [
+            'mahasiswa' => $mahasiswa
+        ]);
+
     }
 
     /**
@@ -19,7 +24,7 @@ class MahasiswaController extends Controller
      */
     public function create()
     {
-        //
+        return view('create');
     }
 
     /**
@@ -27,7 +32,19 @@ class MahasiswaController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'nama' => 'required',
+            'nim' => 'required|unique:mahasiswa',
+            'jurusan' => 'required',
+            'alamat' => 'required',
+        ]);
+        $mahasiswa = new Mahasiswa;
+        $mahasiswa->nama = $request->nama;
+        $mahasiswa->nim = $request->nim;
+        $mahasiswa->jurusan = $request->jurusan;
+        $mahasiswa->alamat = $request->alamat;
+        $mahasiswa->save();
+        return redirect()->route('index');
     }
 
     /**
