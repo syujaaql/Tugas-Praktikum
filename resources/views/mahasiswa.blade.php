@@ -3,7 +3,7 @@
 @section('container')
     <h1 class="text-center">Data Mahasiswa</h1>
     <div class="mb-4">
-    <a href="/mahasiswa/create"><button type="button" class="btn btn-success ">Tambah Data</button>
+    <a href="/mahasiswa/create"><button type="button" class="btn btn-success ">Tambah Data</button></a>
     </div>
     <div class="row">
         <table class="table">
@@ -19,17 +19,16 @@
               </tr>
             </thead>
             <tbody>
-              @foreach($mahasiswa as $mhs)
+              @foreach($mahasiswa as $mahasiswa)
               <tr>
-                <th scope="row">{{$mhs->id_mahasiswa}}</th>
-                <td>{{$mhs->nama}}</td>
-                <td>{{$mhs->nim}}</td>
-                <td>{{$mhs->jurusan}}</td>
-                <td>{{$mhs->alamat}}</td>
-                {{-- <td>{{$mhs->ktm->nomor_identitas}}</td> --}}
-                <td>
-                    <button type="button" class="btn btn-primary">Update</button>
-                    <button type="button" class="btn btn-danger">Hapus</button>
+                <th scope="row">{{$mahasiswa->id_mahasiswa}}</th>
+                <td>{{$mahasiswa->nama}}</td>
+                <td>{{$mahasiswa->nim}}</td>
+                <td>{{$mahasiswa->jurusan}}</td>
+                <td>{{$mahasiswa->alamat}}</td>
+                {{-- <td>{{$mahasiswa->ktm->nomor_identitas}}</td> --}}<td>
+                  <a href="{{route('edit',$mahasiswa->id_mahasiswa)}}"> <button type="button" class="btn btn-primary">Update</button></a>
+                  <a href="{{route('delete',$mahasiswa->id_mahasiswa)}}" onclick="return confirm('Apakah Anda yakin ingin menghapus data ini?')"><button type="button" class="btn btn-danger">Hapus</button></a>
                 </td>
               </tr>
               @endforeach

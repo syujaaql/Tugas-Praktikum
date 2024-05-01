@@ -8,18 +8,18 @@ use Illuminate\Database\Eloquent\Model;
 class Dosen extends Model
 {
     use HasFactory;
-
-    protected $table = 'Dosen';
+    protected $table = 'dosen';
     protected $primaryKey = 'id_dosen';
     public $timestamps = false;
+    public function ktm()
+    {
+        return $this->hasOne(ktm::class, 'id_dosen');
+    }
     protected $fillable = [
+        'nip',
         'nama',
         'email',
-        'nip',
-        'fakultas'
+        'matakuliah',
+        'gender'
     ];
-
-    public function ktm(){
-        return $this->hasOne(ktm::class, 'id_dosen'); //hasMany untuk one to many
-    }
 }
